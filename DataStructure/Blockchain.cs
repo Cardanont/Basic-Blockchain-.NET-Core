@@ -44,5 +44,25 @@ namespace BasicBlockchain.DataStructure
             Chain.Add(block);
         }
 
+        public bool IsValid()
+        {
+            for (int i = 0; i < Chain.Count; i++)
+            {
+                Block currentBlock = Chain[i];
+                Block previousBlock = Chain[i - 1];
+
+                if(currentBlock.Hash != currentBlock.CalculateHash())
+                {
+                    return false;
+                }
+
+                if(currentBlock.PreviousHash != previousBlock.Hash)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }
